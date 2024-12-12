@@ -1,3 +1,5 @@
+#ifndef codes
+#define codes
 
 #define EXIT_OK 0
 #define EXIT_ERROR 1
@@ -21,3 +23,5 @@
 #define EXIT_OOM 19
 #define EXIT_CLIENT_ERROR 20
 #define EXIT_ASYNC_ERROR 21
+
+#endif

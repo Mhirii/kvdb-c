@@ -1,3 +1,6 @@
+#ifndef Log
+#define Log
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,3 +23,5 @@
   logMessage(GRAY "DEBUG" RESET, message, ##__VA_ARGS__, NULL)
 
 void logMessage(char *level, char *message, ...);
+
+#endif

@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
+  // FIXME: handle main correctly
   struct HashTable *table = NewHashTable();
   char *key = "key1";
   char *value = "value1";

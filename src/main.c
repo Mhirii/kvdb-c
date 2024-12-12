@@ -1,13 +1,12 @@
 #include "main.h"
 #include "config.c"
 #include "hashTable.c"
-#include "lib/error.c"
 #include "lib/lib.h"
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
   // FIXME: handle main correctly
-  struct HashTable *table = NewHashTable();
+  struct HashTable *table = NewHashTable("initial");
   char *key = "key1";
   char *value = "value1";
   HashTableSet(table, key, value);
@@ -38,7 +37,7 @@ int main(int argc, char *argv[]) {
       break;
     case 3:
       printf("Enter key: ");
-      newError("Something went wrong");
+      newError("Unimplemented");
       char key3[100];
       scanf("%s", key3);
       char *value3 = HashTableGet(table, key3);

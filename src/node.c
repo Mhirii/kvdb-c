@@ -1,4 +1,5 @@
 #include "node.h"
+#include "lib/error.c"
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,6 +11,7 @@ struct Node *newPair(char *key, char *value) {
   struct Node *pair = (struct Node *)malloc(sizeof(struct Node));
 
   if (!pair) {
+    logError("Memory allocation error when allocating a new pair.");
     return NULL;
   }
 
@@ -17,6 +19,7 @@ struct Node *newPair(char *key, char *value) {
   pair->key = strdup(key);
   if (!pair->key) {
     free(pair);
+    logError("Memory allocation error when allocating key for a new pair.");
     return NULL;
   }
 
@@ -24,6 +27,7 @@ struct Node *newPair(char *key, char *value) {
   if (!pair->value) {
     free(pair->key);
     free(pair);
+    logError("Memory allocation error when allocating value for a new pair.");
     return NULL;
   }
 
@@ -32,11 +36,13 @@ struct Node *newPair(char *key, char *value) {
 
 int setNewValue(struct Node *pair, char *value) {
   if (!pair || !value) {
+    logError("Invalid arguments provided to setNewValue.");
     return 0;
   }
 
   char *new_value = strdup(value);
   if (!new_value) {
+    logError("Memory allocation error when allocating new value for a pair.");
     return 0;
   }
 
@@ -47,6 +53,7 @@ int setNewValue(struct Node *pair, char *value) {
 
 int deleteKVPair(struct Node *pair) {
   if (!pair) {
+    logError("Invalid arguments provided to deleteKVPair.");
     return 0;
   }
 

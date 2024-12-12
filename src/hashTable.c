@@ -1,13 +1,29 @@
 #include "hashTable.h"
+#include "lib/error.c"
 #include <stdlib.h>
 #include <string.h>
 
 #define TABLE_SIZE 1024
 
-struct HashTable *NewHashTable() {
+struct HashTable *NewHashTable(char *name) {
   struct HashTable *table =
       (struct HashTable *)malloc(sizeof(struct HashTable));
   if (table == NULL) {
+    logError("Memory allocation error when allocating a new hash table.");
+    return NULL;
+  }
+
+  if (name == NULL) {
+    table->name = NULL;
+    logError("Invalid arguments provided to NewHashTable.");
+    return NULL;
+  }
+
+  table->name = name;
+  if (table->name == NULL) {
+    free(table);
+    logError("Memory allocation error when allocating owner for a new hash "
+             "table.");
     return NULL;
   }
 
@@ -84,10 +100,13 @@ int FreeHashTable(struct HashTable *table) {
     struct Node *node = table->node[i];
     while (node != NULL) {
       struct Node *next = node->next;
+      free(node->key);
+      free(node->value);
       free(node);
       node = next;
     }
   }
+  free(table->name);
   free(table->node);
   free(table);
   return 1;

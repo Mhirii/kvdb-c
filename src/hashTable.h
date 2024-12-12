@@ -4,11 +4,12 @@ struct HashTable {
     int size;
     int count;
     struct Node **node;
+    char *name;
 };
 
 
 /* Create a hash table. */
-struct HashTable *NewHashTable();
+struct HashTable *NewHashTable(char *name);
 
 /* Free a hash table. */
 int FreeHashTable(struct HashTable *table);

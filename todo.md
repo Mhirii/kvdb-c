@@ -1,4 +1,4 @@
-[ ] In memory hash table
+[x] In memory hash table
 [ ] Log Structured Merge Tree
 [ ] Log file
 [ ] Config file

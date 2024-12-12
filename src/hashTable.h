@@ -23,3 +23,7 @@ int HashTableCount(struct HashTable *table);
 int HashTableSize(struct HashTable *table);
 
 unsigned int hash( char *key);
+
+int WriteHashTableToFile(struct HashTable *table, char *filename);
+
+struct HashTable *ReadHashTableFromFile(char *filename);

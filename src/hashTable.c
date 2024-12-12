@@ -1,5 +1,6 @@
 #include "hashTable.h"
 #include "lib/error.c"
+#include "lib/utils.c"
 #include <stdlib.h>
 #include <string.h>
 
@@ -136,4 +137,29 @@ unsigned int hash(char *key) {
   hash ^= (hash >> 11);
   hash += (hash << 15);
   return hash % TABLE_SIZE;
+}
+
+int writeHashTable(struct HashTable *table, FILE *fp) {
+
+  char *timestamp = get_timestamp();
+
+  char filename[256];
+  snprintf(filename, sizeof(filename), "%s-%s", timestamp, table->name);
+
+  fp = fopen(filename, "w");
+  if (fp == NULL) {
+    return 0;
+  }
+
+  fprintf(fp, "HashTable %s\n", table->name);
+  for (int i = 0; i < table->size; i++) {
+    struct Node *node = table->node[i];
+    while (node != NULL) {
+      fprintf(fp, "Key: %s, Value: %s\n", node->key, node->value);
+      node = node->next;
+    }
+  }
+
+  fclose(fp);
+  return 1;
 }

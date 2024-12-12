@@ -1,11 +1,16 @@
 #include "main.h"
+#include "bootstrap.c"
 #include "config.c"
 #include "hashTable.c"
-#include "lib/lib.h"
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
   // FIXME: handle main correctly
+  if (!bootstrap()) {
+    newError("Bootstrap Failed");
+    return 1;
+  };
+
   struct HashTable *table = NewHashTable("initial");
   char *key = "key1";
   char *value = "value1";
